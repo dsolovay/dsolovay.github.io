@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hexo</title>
+  <title>Creating MongoDB Shards and Replica Sets with PowerShell | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="In the MongoDB University course “M101N: MongoDB for .NET Developers”, there is a walk through of a UNIX script to create a 3x3 set of shards and replica sets. To brush up on my MongoDB and my Powersh">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Creating MongoDB Shards and Replica Sets with PowerShell">
+<meta property="og:url" content="http://yoursite.com/2015/11/25/Creating-MongoDB-Shards-and-Replica-Sets-with-PowerShell/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description">
+<meta property="og:description" content="In the MongoDB University course “M101N: MongoDB for .NET Developers”, there is a walk through of a UNIX script to create a 3x3 set of shards and replica sets. To brush up on my MongoDB and my Powersh">
+<meta property="og:updated_time" content="2015-11-25T20:46:52.567Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description">
+<meta name="twitter:title" content="Creating MongoDB Shards and Replica Sets with PowerShell">
+<meta name="twitter:description" content="In the MongoDB University course “M101N: MongoDB for .NET Developers”, there is a walk through of a UNIX script to create a 3x3 set of shards and replica sets. To brush up on my MongoDB and my Powersh">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -59,54 +60,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/11/25/hello-world/" class="article-date">
-  <time datetime="2015-11-25T19:26:32.910Z" itemprop="datePublished">2015-11-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/25/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/11/25/hello-world/" data-id="cihfa8jl00001ngz56741uq2q" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Creating-MongoDB-Shards-and-Replica-Sets-with-PowerShell" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Creating-MongoDB-Shards-and-Replica-Sets-with-PowerShell" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/11/25/Creating-MongoDB-Shards-and-Replica-Sets-with-PowerShell/" class="article-date">
   <time datetime="2015-11-25T11:00:00.000Z" itemprop="datePublished">2015-11-25</time>
@@ -119,8 +73,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/25/Creating-MongoDB-Shards-and-Replica-Sets-with-PowerShell/">Creating MongoDB Shards and Replica Sets with PowerShell</a>
+    <h1 class="article-title" itemprop="name">
+      Creating MongoDB Shards and Replica Sets with PowerShell
     </h1>
   
 
@@ -302,52 +256,29 @@ echo "</span><span class="transposed_variable">sh.</span>status()<span class="st
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-My-New-Post" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/11/24/My-New-Post/" class="article-date">
-  <time datetime="2015-11-24T17:13:14.000Z" itemprop="datePublished">2015-11-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <a href="/2015/11/25/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
         
+          Hello World
+        
+      </div>
+    </a>
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/24/My-New-Post/">My New Post</a>
-    </h1>
   
+    <a href="/2015/11/24/My-New-Post/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">My New Post</div>
+    </a>
+  
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Subheading">Subheading</h2><p>Some discursive text.</p>
-<pre><code><span class="tag">&lt;html&gt;</span>
-<span class="keyword">This</span> is code.
-<span class="tag">&lt;/html&gt;</span>
-</code></pre><p>I could get <em>used</em> to this. This is <strong>easy</strong>!!</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/11/24/My-New-Post/" data-id="cihfa8jl30002ngz5y0l44jk5" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
 
-
-  
-  
 </section>
         
           <aside id="sidebar">
