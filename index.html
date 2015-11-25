@@ -100,7 +100,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/11/25/hello-world/" data-id="cihfc5awd0001lcz5ahw25yxn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/11/25/hello-world/" data-id="cihfd0n7m0001jcz5llxajq6m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -298,7 +298,7 @@ echo "</span><span class="transposed_variable">sh.</span>status()<span class="st
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/11/25/Creating-MongoDB-Shards-and-Replica-Sets-with-PowerShell/" data-id="cihfc5awn0008lcz57xhmdmoe" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/11/25/Creating-MongoDB-Shards-and-Replica-Sets-with-PowerShell/" data-id="cihfd0n7t0008jcz5i92ggfv5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MongoDB/">MongoDB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PowerShell/">PowerShell</a></li></ul>
@@ -341,7 +341,7 @@ echo "</span><span class="transposed_variable">sh.</span>status()<span class="st
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/11/24/My-New-Post/" data-id="cihfc5awg0002lcz5c79ja50y" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/11/24/My-New-Post/" data-id="cihfd0n7p0002jcz5af9f4418" class="article-share-link">Share</a>
       
       
     </footer>
@@ -413,10 +413,78 @@ echo "</span><span class="transposed_variable">sh.</span>status()<span class="st
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/11/18/Custom-Sitecore-Log-Files/" data-id="cihfc5awj0003lcz5mi8erqon" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/11/18/Custom-Sitecore-Log-Files/" data-id="cihfd0n7q0003jcz52s5fzum3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Logging/">Logging</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sitecore/">Sitecore</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-A-RoboMongo-Trick" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/07/A-RoboMongo-Trick/" class="article-date">
+  <time datetime="2015-11-07T11:00:00.000Z" itemprop="datePublished">2015-11-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/07/A-RoboMongo-Trick/">A RoboMongo Trick</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>RoboMongo is a nice tool for digging around xDB databases. It provides the full feature set of the JavaScript shell (you can save variables, run help commands, etc.) and allows you to do things like edit documents directly through the JSON display.</p>
+<p>One small annoyance, however, is that it is difficult to search by GUIDs.  Guids in MongoDB are a tricky business.  They are represented as binary objects, displayed by the format</p>
+<pre><code><span class="function"><span class="title">BinData</span><span class="params">(<span class="number">3</span>,<span class="string">"n1UNEaXe6kKcHIpd9+cO+Q=="</span>)</span></span>
+</code></pre><p>You can get at the underlying hex value by typing</p>
+<pre><code><span class="function"><span class="title">BinData</span><span class="params">(<span class="number">3</span>,<span class="string">"n1UNEaXe6kKcHIpd9+cO+Q=="</span>)</span></span>.<span class="function"><span class="title">hex</span><span class="params">()</span></span>
+</code></pre><p>which will give you <code>9f550d11a5deea429c1c8a5df7e70ef9</code> which looks a lot like a GUID. But is not one, for arcane historical reasons.  (Basically, Microsoft has a somewhat idiosyncratic way of arranging the bytes in the Guid.ToString() method.  More info here: <a href="http://stackoverflow.com/questions/3320501/why-isnt-guid-tostringn-the-same-as-a-hex-string-generated-from-a-byte-arra" target="_blank" rel="external">http://stackoverflow.com/questions/3320501/why-isnt-guid-tostringn-the-same-as-a-hex-string-generated-from-a-byte-arra</a></p>
+<p>The value <code>BinData(3,&quot;n1UNEaXe6kKcHIpd9+cO+Q==&quot;)</code> actually corresponds <code>110d559f-dea5-42ea-9c1c-8a5df7e70ef9</code>, the ID of the Sitecore Home item.  There are two ways you can make this conversion.  While using the Mongo shell, you can load the JavaScript file uuidhelpers.js (Save it to c:\tools\uuidhelpers.js, and then run <code>load(&quot;c:\\tools\\uuidhelpers.js&quot;)</code>.  </p>
+<p>This will give you two useful functions:</p>
+<ul>
+<li><code>CSUUID(&quot;some guid&quot;)</code>, which generates a proper mongo BinData guid for your .NET Guid, </li>
+<li><code>.toCSUUID()</code>, which gives a GUID display for a BinData item. <code>BinData(3,&quot;n1UNEaXe6kKcHIpd9+cO+Q==&quot;).toCSUUID()</code> returns <code>CSUUID(&quot;110d559f-dea5-42ea-9c1c-8a5df7e70ef9&quot;)</code>.</li>
+</ul>
+<p>It’s a nice feature of this script, and very keeping in the way MongoDB does things, that the representation of the GUID is in the form of the constructor for the BinData object. It makes round-tripping painless, since you can now do things like:</p>
+<pre><code>db.Interactions.findOne({<span class="string">"Page.Item._id"</span>: CSUUID(<span class="string">"110d559f-dea5-42ea-9c1c-8a5df7e70ef9"</span>) })
+</code></pre><p>Which makes a lot more sense then</p>
+<pre><code>db.Interactions.findOne({<span class="string">"Page.Item._id"</span>: BinData(3,<span class="string">"n1UNEaXe6kKcHIpd9+cO+Q=="</span>) })
+</code></pre><p>to us Sitecore/.Net people.</p>
+<p>Or you could use RoboMongo, which has a nifty Legacy UUID menu:<br><img src="http://i.imgur.com/HGzdzIh.png" alt=""></p>
+<p>The .Net setting will display Guids like this:<br><img src="http://i.imgur.com/VZp1Op0.png" alt=""></p>
+<p>This is an improvement, but still not ideal, as the NUUID value is not a JS constructor, so you can’t use the Guid to query for docuemnts.</p>
+<p>For example, this would not work to find all interactions that visited the home item:<br><img src="http://i.imgur.com/Gkuo5zX.png" alt=""></p>
+<p>Similarly, you cannot go from a contact ID here to one in the Contacts table, since you cannot use the displayed GUID field.   This is even a problem if you use Do Not Encode, which still displays the ID in a non-queryable format LUUID(“ guid “), which will again return a not-defined JS error:<br><img src="http://i.imgur.com/Gkuo5zX.png" alt=""></p>
+<p>The way around this is simple. These formats only come into play if the variable is part of a larger JSON display.  If you query the value in isolation, you get the original BinData value:</p>
+<pre><code>db<span class="class">.Interactions</span><span class="class">.findOne</span>()<span class="class">.Pages</span>[<span class="number">0</span>]<span class="class">.Item</span>._id
+</code></pre><p>returns a BinData representation:<br><img src="http://i.imgur.com/kYsOWrJ.png" alt=""></p>
+<p>You can also store this to a variable, like this:</p>
+<pre><code><span class="tag">var</span> homeId = db<span class="class">.Interactions</span><span class="class">.findOne</span>()<span class="class">.Pages</span>[<span class="number">0</span>]<span class="class">.Item</span>._id
+</code></pre><p>Which allows you to run queries like this one:</p>
+<pre><code>db.Interactions.<span class="keyword">find</span>({<span class="string">"Pages.Item._id"</span>: homeId})
+</code></pre><p>And now we have round-tripping. Also useful, as I mentioned above, for looking up contacts by ID in the db.Contacts collection.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/11/07/A-RoboMongo-Trick/" data-id="cihfd0n7w000djcz5lbdnpz40" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Developer-Tools/">Developer Tools</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MongoDB/">MongoDB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sitecore/">Sitecore</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xDB/">xDB</a></li></ul>
 
     </footer>
   </div>
@@ -436,7 +504,7 @@ echo "</span><span class="transposed_variable">sh.</span>status()<span class="st
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logging/">Logging</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerShell/">PowerShell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sitecore/">Sitecore</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Developer-Tools/">Developer Tools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logging/">Logging</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/">MongoDB</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerShell/">PowerShell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sitecore/">Sitecore</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xDB/">xDB</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -445,7 +513,7 @@ echo "</span><span class="transposed_variable">sh.</span>status()<span class="st
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Logging/" style="font-size: 10px;">Logging</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/PowerShell/" style="font-size: 10px;">PowerShell</a> <a href="/tags/Sitecore/" style="font-size: 10px;">Sitecore</a>
+      <a href="/tags/Developer-Tools/" style="font-size: 10px;">Developer Tools</a> <a href="/tags/Logging/" style="font-size: 10px;">Logging</a> <a href="/tags/MongoDB/" style="font-size: 20px;">MongoDB</a> <a href="/tags/PowerShell/" style="font-size: 10px;">PowerShell</a> <a href="/tags/Sitecore/" style="font-size: 20px;">Sitecore</a> <a href="/tags/xDB/" style="font-size: 10px;">xDB</a>
     </div>
   </div>
 
@@ -454,7 +522,7 @@ echo "</span><span class="transposed_variable">sh.</span>status()<span class="st
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">4</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">5</span></li></ul>
     </div>
   </div>
 
@@ -479,6 +547,10 @@ echo "</span><span class="transposed_variable">sh.</span>status()<span class="st
         
           <li>
             <a href="/2015/11/18/Custom-Sitecore-Log-Files/">Custom Sitecore Log Files</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/07/A-RoboMongo-Trick/">A RoboMongo Trick</a>
           </li>
         
       </ul>
