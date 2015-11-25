@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hexo</title>
+  <title>Explorations</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="Explorations">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="Explorations">
 <meta property="og:description">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="Explorations">
 <meta name="twitter:description">
   
-    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="Explorations" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -33,8 +33,12 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
+        <a href="/" id="logo">Explorations</a>
       </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">into Sitecore and .Net</a>
+        </h2>
       
     </div>
     <div id="header-inner" class="inner">
@@ -96,7 +100,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/11/25/hello-world/" data-id="cihfa8jl00001ngz56741uq2q" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/11/25/hello-world/" data-id="cihfc5awd0001lcz5ahw25yxn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -294,7 +298,7 @@ echo "</span><span class="transposed_variable">sh.</span>status()<span class="st
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/11/25/Creating-MongoDB-Shards-and-Replica-Sets-with-PowerShell/" data-id="cihfa8jl50003ngz54x6taosh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/11/25/Creating-MongoDB-Shards-and-Replica-Sets-with-PowerShell/" data-id="cihfc5awn0008lcz57xhmdmoe" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MongoDB/">MongoDB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PowerShell/">PowerShell</a></li></ul>
@@ -337,9 +341,83 @@ echo "</span><span class="transposed_variable">sh.</span>status()<span class="st
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/11/24/My-New-Post/" data-id="cihfa8jl30002ngz5y0l44jk5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/11/24/My-New-Post/" data-id="cihfc5awg0002lcz5c79ja50y" class="article-share-link">Share</a>
       
       
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Custom-Sitecore-Log-Files" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/18/Custom-Sitecore-Log-Files/" class="article-date">
+  <time datetime="2015-11-18T11:00:00.000Z" itemprop="datePublished">2015-11-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/18/Custom-Sitecore-Log-Files/">Custom Sitecore Log Files</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Starting with Sitecore 6.2, and especially since Sitecore 7 we’ve seen an increase in specific log files: WebDAV, Crawling, Search, Publishing, FXM. This is completely configurable, and can be leveraged to keep your application logic separate from the Sitecore log file while still using Sitecore’s logging capabilities.<br>To create a custom log file, you need to do the following three things:</p>
+<ol>
+<li><p>Add an appender in the <log4net> section of web.config (or Sitecore.config after 8.1).  </log4net></p>
+<pre><code><span class="tag">&lt;<span class="title">appender</span> <span class="attribute">name</span>=<span class="value">"MyAppender"</span> <span class="attribute">type</span>=<span class="value">"log4net.Appender.SitecoreLogFileAppender, Sitecore.Logging"</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">file</span> <span class="attribute">value</span>=<span class="value">"$(dataFolder)/logs/MyLog.log.{date}.txt"</span> /&gt;</span>
+  <span class="tag">&lt;<span class="title">appendToFile</span> <span class="attribute">value</span>=<span class="value">"true"</span> /&gt;</span>
+  <span class="tag">&lt;<span class="title">layout</span> <span class="attribute">type</span>=<span class="value">"log4net.Layout.PatternLayout"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">conversionPattern</span> <span class="attribute">value</span>=<span class="value">"%4t %d{ABSOLUTE} %-5p %m%n"</span> /&gt;</span>
+  <span class="tag">&lt;/<span class="title">layout</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">encoding</span> <span class="attribute">value</span>=<span class="value">"utf-8"</span> /&gt;</span>
+<span class="tag">&lt;/<span class="title">appender</span>&gt;</span>
+</code></pre><p>These are the values Sitecore uses for its log file.  You might want to add <immediateflush>true</immediateflush> if you want to avoid waiting for the buffer to flush.</p>
+</li>
+<li><p>Reference the Appender in a logger element.  </p>
+<pre><code>&lt;logger name=<span class="string">"My.Namespace"</span> additivity=<span class="string">"false"</span>&gt;
+&lt;level value=<span class="string">"INFO"</span> /&gt;
+&lt;appender-<span class="keyword">ref</span> <span class="keyword">ref</span>=<span class="string">"MyAppender"</span> /&gt;
+ &lt;/logger&gt;  
+</code></pre><p>Name the logger after your root namespace. If you want to divide different parts of your application into separate logs, you can drive this by being more specific in your namespace.  The level value control what types of messages get written. You can use Debug messages in your classes, and only show this information if you set level to DEBUG.  INFO is the normal setting, which also shows FATAL, ERROR, and WARNING messages, as well as Sitecore’s custom AUDIT message.   </p>
+</li>
+<li><p>Write messages using Sitecore’s log class, passing a reference to the current object.</p>
+<pre><code><span class="keyword">Log</span>.Info(<span class="string">"Your message"</span>, this);
+<span class="keyword">Log</span>.<span class="keyword">Debug</span>(<span class="string">"Your message"</span>, this);
+<span class="keyword">Log</span>.Error(exception, this);  
+<span class="keyword">Log</span>.Audit(<span class="string">"Your message"</span>, this);
+</code></pre><p>The Log.Debug message will only show up if logging is set to DEBUG, which makes this setting ideal for detailed instrumentation.  In addition, AUDIT captures information about who performed the action, writing the results as an INFO messages with the domain and username of the user performing the action.</p>
+</li>
+</ol>
+<p>A few additional notes:</p>
+<ol>
+<li>With Sitecore 8.1, the Log4Net section is moved inside the <sitecore> configuration node, which means it can be added to using Sitecore App_Config/Include patch config files.  </sitecore></li>
+<li>You can have several loggers point to the same appender, which might allow you to group your info with that of a specific Sitecore namespace, of to run part of your application with DEBUG logging, and the rest with INFO logging.  </li>
+<li>Sitecore Log Analyzer is a great tool for working with log data once you’ve collected it.  For example, it allows you to view just errors, or just one kind of error.  </li>
+<li>Log4Net documentation recommends checking if a log message is enabled before writing to it, to save on milliseconds of processing time for creating the string message (e.g. for concatenating a string). This is no longer possible with Sitecore’s wrapper around log4net, as <code>Log.IsDebugEnabled()</code>, for example, is a static method, so there is no way to examine the level setting for a given namespace.  </li>
+</ol>
+<p>Props to Mark Ursino for blogging about custom log files way back in 2011, and to Kamraz Juman for pointing out the Log.Info(“message”, this) syntax in the comments.  <a href="http://firebreaksice.com/write-to-a-custom-sitecore-log-with-log4net/" target="_blank" rel="external">http://firebreaksice.com/write-to-a-custom-sitecore-log-with-log4net/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/11/18/Custom-Sitecore-Log-Files/" data-id="cihfc5awj0003lcz5mi8erqon" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Logging/">Logging</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sitecore/">Sitecore</a></li></ul>
+
     </footer>
   </div>
   
@@ -358,7 +436,7 @@ echo "</span><span class="transposed_variable">sh.</span>status()<span class="st
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerShell/">PowerShell</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logging/">Logging</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerShell/">PowerShell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sitecore/">Sitecore</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -367,7 +445,7 @@ echo "</span><span class="transposed_variable">sh.</span>status()<span class="st
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/PowerShell/" style="font-size: 10px;">PowerShell</a>
+      <a href="/tags/Logging/" style="font-size: 10px;">Logging</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/PowerShell/" style="font-size: 10px;">PowerShell</a> <a href="/tags/Sitecore/" style="font-size: 10px;">Sitecore</a>
     </div>
   </div>
 
@@ -376,7 +454,7 @@ echo "</span><span class="transposed_variable">sh.</span>status()<span class="st
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">4</span></li></ul>
     </div>
   </div>
 
@@ -399,6 +477,10 @@ echo "</span><span class="transposed_variable">sh.</span>status()<span class="st
             <a href="/2015/11/24/My-New-Post/">My New Post</a>
           </li>
         
+          <li>
+            <a href="/2015/11/18/Custom-Sitecore-Log-Files/">Custom Sitecore Log Files</a>
+          </li>
+        
       </ul>
     </div>
   </div>
@@ -411,7 +493,7 @@ echo "</span><span class="transposed_variable">sh.</span>status()<span class="st
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2015 John Doe<br>
+      &copy; 2015 Dan Solovay<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
