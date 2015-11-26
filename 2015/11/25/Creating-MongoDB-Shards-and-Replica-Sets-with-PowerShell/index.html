@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://yoursite.com/2015/11/25/Creating-MongoDB-Shards-and-Replica-Sets-with-PowerShell/index.html">
 <meta property="og:site_name" content="Explorations">
 <meta property="og:description" content="In the MongoDB University course “M101N: MongoDB for .NET Developers”, there is a walk through of a UNIX script to create a 3x3 set of shards and replica sets. To brush up on my MongoDB and my Powersh">
-<meta property="og:updated_time" content="2015-11-26T02:35:26.369Z">
+<meta property="og:updated_time" content="2015-11-26T03:21:25.785Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Creating MongoDB Shards and Replica Sets with PowerShell">
 <meta name="twitter:description" content="In the MongoDB University course “M101N: MongoDB for .NET Developers”, there is a walk through of a UNIX script to create a 3x3 set of shards and replica sets. To brush up on my MongoDB and my Powersh">
@@ -170,7 +170,7 @@ start-process mongod <span class="variable">$arg_b</span>
 start-process mongod <span class="variable">$arg_c</span>
 
 report <span class="string">"Config servers up"</span>
-</code></pre><p>Two configuration servers stores the definitive version of what data resides where; the <code>mongos</code> instances keep this data in memory.</p>
+</code></pre><p>The configuration servers store the definitive version of what data resides where; the <code>mongos</code> instances keep this data in memory.</p>
 <p>Once the configuration servers are set up, the next step is to add the shards. Note the step to make sure that port 50000 is on line.  Basically, if the response does not contains a line with the word “failed”, the server is treated as on-line.</p>
 <pre><code>report <span class="string">"Launch mongos"</span>
 
@@ -248,7 +248,7 @@ echo "</span><span class="transposed_variable">sh.</span>status()<span class="st
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/11/25/Creating-MongoDB-Shards-and-Replica-Sets-with-PowerShell/" data-id="cihfmvjhw0008fkz5vhne3bez" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/11/25/Creating-MongoDB-Shards-and-Replica-Sets-with-PowerShell/" data-id="cihfos2pg0008igz5ai9zdczj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MongoDB/">MongoDB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PowerShell/">PowerShell</a></li></ul>

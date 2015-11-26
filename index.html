@@ -96,7 +96,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/11/25/hello-world/" data-id="cihfmvjho0001fkz59isje25r" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/11/25/hello-world/" data-id="cihfos2p50001igz5e3wk29p5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -216,7 +216,7 @@ start-process mongod <span class="variable">$arg_b</span>
 start-process mongod <span class="variable">$arg_c</span>
 
 report <span class="string">"Config servers up"</span>
-</code></pre><p>Two configuration servers stores the definitive version of what data resides where; the <code>mongos</code> instances keep this data in memory.</p>
+</code></pre><p>The configuration servers store the definitive version of what data resides where; the <code>mongos</code> instances keep this data in memory.</p>
 <p>Once the configuration servers are set up, the next step is to add the shards. Note the step to make sure that port 50000 is on line.  Basically, if the response does not contains a line with the word “failed”, the server is treated as on-line.</p>
 <pre><code>report <span class="string">"Launch mongos"</span>
 
@@ -294,7 +294,7 @@ echo "</span><span class="transposed_variable">sh.</span>status()<span class="st
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/11/25/Creating-MongoDB-Shards-and-Replica-Sets-with-PowerShell/" data-id="cihfmvjhw0008fkz5vhne3bez" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/11/25/Creating-MongoDB-Shards-and-Replica-Sets-with-PowerShell/" data-id="cihfos2pg0008igz5ai9zdczj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MongoDB/">MongoDB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PowerShell/">PowerShell</a></li></ul>
@@ -337,7 +337,7 @@ echo "</span><span class="transposed_variable">sh.</span>status()<span class="st
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/11/24/My-New-Post/" data-id="cihfmvjhq0002fkz5kj1sbatj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/11/24/My-New-Post/" data-id="cihfos2pb0002igz5xi2wxczp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -371,7 +371,7 @@ echo "</span><span class="transposed_variable">sh.</span>status()<span class="st
       
         <p>Starting with Sitecore 6.2, and especially since Sitecore 7 we’ve seen an increase in specific log files: WebDAV, Crawling, Search, Publishing, FXM. This is completely configurable, and can be leveraged to keep your application logic separate from the Sitecore log file while still using Sitecore’s logging capabilities.<br>To create a custom log file, you need to do the following three things:</p>
 <ol>
-<li><p>Add an appender in the <log4net> section of web.config (or Sitecore.config after 8.1).  </log4net></p>
+<li><p>Add an appender in the <code>&lt;log4net&gt;</code> section of web.config (or Sitecore.config after 8.1).  </p>
 <pre><code><span class="tag">&lt;<span class="title">appender</span> <span class="attribute">name</span>=<span class="value">"MyAppender"</span> <span class="attribute">type</span>=<span class="value">"log4net.Appender.SitecoreLogFileAppender, Sitecore.Logging"</span>&gt;</span>
   <span class="tag">&lt;<span class="title">file</span> <span class="attribute">value</span>=<span class="value">"$(dataFolder)/logs/MyLog.log.{date}.txt"</span> /&gt;</span>
   <span class="tag">&lt;<span class="title">appendToFile</span> <span class="attribute">value</span>=<span class="value">"true"</span> /&gt;</span>
@@ -380,7 +380,7 @@ echo "</span><span class="transposed_variable">sh.</span>status()<span class="st
   <span class="tag">&lt;/<span class="title">layout</span>&gt;</span>
   <span class="tag">&lt;<span class="title">encoding</span> <span class="attribute">value</span>=<span class="value">"utf-8"</span> /&gt;</span>
 <span class="tag">&lt;/<span class="title">appender</span>&gt;</span>
-</code></pre><p>These are the values Sitecore uses for its log file.  You might want to add <immediateflush>true</immediateflush> if you want to avoid waiting for the buffer to flush.</p>
+</code></pre><p>These are the values Sitecore uses for its log file.  You might want to add <code>&lt;immediateFlush&gt;true&lt;/immediateFlush&gt;</code> if you want to avoid waiting for the buffer to flush.</p>
 </li>
 <li><p>Reference the Appender in a logger element.  </p>
 <pre><code>&lt;logger name=<span class="string">"My.Namespace"</span> additivity=<span class="string">"false"</span>&gt;
@@ -402,14 +402,14 @@ echo "</span><span class="transposed_variable">sh.</span>status()<span class="st
 <li>With Sitecore 8.1, the Log4Net section is moved inside the <sitecore> configuration node, which means it can be added to using Sitecore App_Config/Include patch config files.  </sitecore></li>
 <li>You can have several loggers point to the same appender, which might allow you to group your info with that of a specific Sitecore namespace, of to run part of your application with DEBUG logging, and the rest with INFO logging.  </li>
 <li>Sitecore Log Analyzer is a great tool for working with log data once you’ve collected it.  For example, it allows you to view just errors, or just one kind of error.  </li>
-<li>Log4Net documentation recommends checking if a log message is enabled before writing to it, to save on milliseconds of processing time for creating the string message (e.g. for concatenating a string). This is no longer possible with Sitecore’s wrapper around log4net, as <code>Log.IsDebugEnabled()</code>, for example, is a static method, so there is no way to examine the level setting for a given namespace.  </li>
+<li>Log4Net <a href="https://logging.apache.org/log4net/release/manual/internals.html" target="_blank" rel="external">documentation</a> recommends checking if a log message is enabled before writing to it, to save on milliseconds of processing time for creating the string message (e.g. for concatenating a string). This is no longer possible with Sitecore’s wrapper around log4net, as <code>Log.IsDebugEnabled()</code>, for example, is a static method, so there is no way to examine the level setting for a given namespace.  </li>
 </ol>
 <p>Props to Mark Ursino for blogging about custom log files way back in 2011, and to Kamraz Juman for pointing out the Log.Info(“message”, this) syntax in the comments.  <a href="http://firebreaksice.com/write-to-a-custom-sitecore-log-with-log4net/" target="_blank" rel="external">http://firebreaksice.com/write-to-a-custom-sitecore-log-with-log4net/</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/11/18/Custom-Sitecore-Log-Files/" data-id="cihfmvjhs0003fkz54fsizfln" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/11/18/Custom-Sitecore-Log-Files/" data-id="cihfos2pd0003igz5ie2o02rv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Logging/">Logging</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sitecore/">Sitecore</a></li></ul>
@@ -443,7 +443,7 @@ echo "</span><span class="transposed_variable">sh.</span>status()<span class="st
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>RoboMongo is a nice tool for digging around xDB databases. It provides the full feature set of the JavaScript shell (you can save variables, run help commands, etc.) and allows you to do things like edit documents directly through the JSON display.</p>
+        <p><a href="http://robomongo.org/" target="_blank" rel="external">RoboMongo</a> is a nice tool for digging around xDB databases. It provides the full feature set of the JavaScript shell (you can save variables, run help commands, etc.) and allows you to do things like edit documents directly through the JSON display.</p>
 <p>One small annoyance, however, is that it is difficult to search by GUIDs.  Guids in MongoDB are a tricky business.  They are represented as binary objects, displayed by the format</p>
 <pre><code><span class="function"><span class="title">BinData</span><span class="params">(<span class="number">3</span>,<span class="string">"n1UNEaXe6kKcHIpd9+cO+Q=="</span>)</span></span>
 </code></pre><p>You can get at the underlying hex value by typing</p>
@@ -477,7 +477,7 @@ echo "</span><span class="transposed_variable">sh.</span>status()<span class="st
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/11/04/A-RoboMongo-Trick/" data-id="cihfmvjhy000dfkz5gcezarod" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/11/04/A-RoboMongo-Trick/" data-id="cihfos2pj000digz508bp4yp1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Developer-Tools/">Developer Tools</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MongoDB/">MongoDB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sitecore/">Sitecore</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xDB/">xDB</a></li></ul>

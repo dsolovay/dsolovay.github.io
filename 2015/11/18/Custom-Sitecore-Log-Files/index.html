@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://yoursite.com/2015/11/18/Custom-Sitecore-Log-Files/index.html">
 <meta property="og:site_name" content="Explorations">
 <meta property="og:description" content="Starting with Sitecore 6.2, and especially since Sitecore 7 we’ve seen an increase in specific log files: WebDAV, Crawling, Search, Publishing, FXM. This is completely configurable, and can be leverag">
-<meta property="og:updated_time" content="2015-11-25T21:39:19.083Z">
+<meta property="og:updated_time" content="2015-11-26T03:28:39.560Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Custom Sitecore Log Files">
 <meta name="twitter:description" content="Starting with Sitecore 6.2, and especially since Sitecore 7 we’ve seen an increase in specific log files: WebDAV, Crawling, Search, Publishing, FXM. This is completely configurable, and can be leverag">
@@ -84,7 +84,7 @@
       
         <p>Starting with Sitecore 6.2, and especially since Sitecore 7 we’ve seen an increase in specific log files: WebDAV, Crawling, Search, Publishing, FXM. This is completely configurable, and can be leveraged to keep your application logic separate from the Sitecore log file while still using Sitecore’s logging capabilities.<br>To create a custom log file, you need to do the following three things:</p>
 <ol>
-<li><p>Add an appender in the <log4net> section of web.config (or Sitecore.config after 8.1).  </log4net></p>
+<li><p>Add an appender in the <code>&lt;log4net&gt;</code> section of web.config (or Sitecore.config after 8.1).  </p>
 <pre><code><span class="tag">&lt;<span class="title">appender</span> <span class="attribute">name</span>=<span class="value">"MyAppender"</span> <span class="attribute">type</span>=<span class="value">"log4net.Appender.SitecoreLogFileAppender, Sitecore.Logging"</span>&gt;</span>
   <span class="tag">&lt;<span class="title">file</span> <span class="attribute">value</span>=<span class="value">"$(dataFolder)/logs/MyLog.log.{date}.txt"</span> /&gt;</span>
   <span class="tag">&lt;<span class="title">appendToFile</span> <span class="attribute">value</span>=<span class="value">"true"</span> /&gt;</span>
@@ -93,7 +93,7 @@
   <span class="tag">&lt;/<span class="title">layout</span>&gt;</span>
   <span class="tag">&lt;<span class="title">encoding</span> <span class="attribute">value</span>=<span class="value">"utf-8"</span> /&gt;</span>
 <span class="tag">&lt;/<span class="title">appender</span>&gt;</span>
-</code></pre><p>These are the values Sitecore uses for its log file.  You might want to add <immediateflush>true</immediateflush> if you want to avoid waiting for the buffer to flush.</p>
+</code></pre><p>These are the values Sitecore uses for its log file.  You might want to add <code>&lt;immediateFlush&gt;true&lt;/immediateFlush&gt;</code> if you want to avoid waiting for the buffer to flush.</p>
 </li>
 <li><p>Reference the Appender in a logger element.  </p>
 <pre><code>&lt;logger name=<span class="string">"My.Namespace"</span> additivity=<span class="string">"false"</span>&gt;
@@ -115,14 +115,14 @@
 <li>With Sitecore 8.1, the Log4Net section is moved inside the <sitecore> configuration node, which means it can be added to using Sitecore App_Config/Include patch config files.  </sitecore></li>
 <li>You can have several loggers point to the same appender, which might allow you to group your info with that of a specific Sitecore namespace, of to run part of your application with DEBUG logging, and the rest with INFO logging.  </li>
 <li>Sitecore Log Analyzer is a great tool for working with log data once you’ve collected it.  For example, it allows you to view just errors, or just one kind of error.  </li>
-<li>Log4Net documentation recommends checking if a log message is enabled before writing to it, to save on milliseconds of processing time for creating the string message (e.g. for concatenating a string). This is no longer possible with Sitecore’s wrapper around log4net, as <code>Log.IsDebugEnabled()</code>, for example, is a static method, so there is no way to examine the level setting for a given namespace.  </li>
+<li>Log4Net <a href="https://logging.apache.org/log4net/release/manual/internals.html" target="_blank" rel="external">documentation</a> recommends checking if a log message is enabled before writing to it, to save on milliseconds of processing time for creating the string message (e.g. for concatenating a string). This is no longer possible with Sitecore’s wrapper around log4net, as <code>Log.IsDebugEnabled()</code>, for example, is a static method, so there is no way to examine the level setting for a given namespace.  </li>
 </ol>
 <p>Props to Mark Ursino for blogging about custom log files way back in 2011, and to Kamraz Juman for pointing out the Log.Info(“message”, this) syntax in the comments.  <a href="http://firebreaksice.com/write-to-a-custom-sitecore-log-with-log4net/" target="_blank" rel="external">http://firebreaksice.com/write-to-a-custom-sitecore-log-with-log4net/</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/11/18/Custom-Sitecore-Log-Files/" data-id="cihfmvjhs0003fkz54fsizfln" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/11/18/Custom-Sitecore-Log-Files/" data-id="cihfos2pd0003igz5ie2o02rv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Logging/">Logging</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sitecore/">Sitecore</a></li></ul>
